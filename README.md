@@ -1,44 +1,31 @@
-# Mein Gesundheits-Tracker – Version 2.0
+# Mein Gesundheits-Tracker 3.0 – Update für GitHub Pages
 
-Eine kostenlose, lokal speichernde iPhone-Web-App für die **14 Excel-Kriterien** in Ernährung, Schlaf und Bewegung. Keine Registrierung innerhalb der App, kein Server für persönliche Einträge.
+## Was neu ist
+- **Analyse**: Tage (28 Tage), Wochen (12 Wochen), Monate (12 Monate) mit Zeitraum-Navigation, Bereich und allen **14 Einzelkriterien** sowie Gruppen- und Gesamtbewertung. Diagramm mit fehlenden Daten als Lücken; Zielwert-Linie, Verteilung und 28-Tage-Vergleich.
+- **Persönliche Ziele**: 0 bis 5 Punkte je Unterkriterium, Bereich und Gesamtwert. Voreinstellung 4,0. Die alten wöchentlichen Aktivitätsziele bleiben unverändert.
+- **Maßnahmen**: Freitext-Maßnahme, Startdatum, zugeordnetes Kriterium, Status (geplant / aktiv / abgeschlossen / nicht wirksam).
+- **Monatsreview**: Bereichsergebnisse gegenüber dem Vormonat, Verbesserungsfelder, positive Entwicklungen und laufende Maßnahmen. Eine Bewertung ist kein klinischer Gesundheitswert.
+- **V3-Backup**: Vollständiges JSON mit allen alten Daten, Messwerten, Wochenzielen, neuen Zielwerten und Maßnahmen. Import von v1, v2 und v3 möglich.
 
-## Sicheres Update von Version 1 (unbedingt in dieser Reihenfolge)
+## Update auf GitHub und Daten behalten (Reihenfolge wichtig)
 
-1. **Am iPhone die bisherige App öffnen**, Reiter **Daten** → **JSON sichern**. Backup in der App **Dateien** bzw. iCloud Drive ablegen. Falls du die Originaldaten erneut brauchst, gibt es zusätzlich das private ursprüngliche JSON-Backup aus der vorherigen Unterhaltung.
-2. **GitHub** → Repository `gesundheits-tracker` → **Add file → Upload files** öffnen.
-3. Alle **sieben Web-Dateien** aus diesem ZIP direkt in das **Hauptverzeichnis** laden: `index.html`, `style.css`, `app.js`, `sw.js`, `manifest.webmanifest`, `icon.svg`, `data.js`. `README.md` ist optional. Bei gleichnamigen Dateien die vorhandene Fassung durch die neue ersetzen. **Keine ZIP-Datei und keine Gesundheits-Backups hochladen!**
-4. Änderungen mit **Commit changes** bestätigen. GitHub Pages verwendet weiter **Settings → Pages → Deploy from a branch → main → /(root)**.
-5. Die GitHub-Pages-Adresse **auf dem iPhone in Safari öffnen** und neu laden. Eine bereits installierte Home-Bildschirm-Web-App sollte dieselbe URL weiterverwenden. Bei altem Bildschirm: die Website in Safari einmal neu laden und die App vollständig schließen/neu öffnen. GitHub Pages und Service Worker können ein wenig zur Aktualisierung benötigen.
-6. **Daten prüfen:** Reiter **Daten** und Tag/Woche anschauen. Die alte lokale Speicherkennung `gesundheits_tracker_v1` bleibt unverändert. **Nur wenn Einträge fehlen**: Reiter **Daten** → **JSON importieren** → gesicherte v1-Datei wählen. Der Import ersetzt alle gerade vorhandenen Einträge.
-7. **Neues v2-Backup** erstellen. Es enthält zusätzlich Messwerte, Aktivitäten und deine Zielwerte.
+1. Auf dem **iPhone** die bisherige App öffnen: **Daten → Vollständiges Backup (JSON)**. Sicherung in "Dateien" oder iCloud Drive ablegen und kontrollieren, dass die `.json`-Datei existiert. **Nicht** zu GitHub hochladen.
+2. **GitHub** im bestehenden Repository `gesundheits-tracker` öffnen → **Add file → Upload files**. Die **entpackten acht App-Dateien** aus diesem ZIP hochladen: `index.html`, `style.css`, `app.js`, `v3.js` (neu), `sw.js`, `data.js`, `manifest.webmanifest`, `icon.svg`. `README.md` ist optional. Gleichnamige Dateien im Hauptverzeichnis ersetzen.
+3. **Commit changes** anklicken. Unter **Settings → Pages** die bisherigen Einstellungen `Deploy from a branch`, `main`, `/(root)` beibehalten.
+4. Auf dem iPhone die **bestehende GitHub-Pages-Adresse** in Safari neu öffnen, neu laden; die installierte Web-App erneut öffnen. Möglicherweise alte App schließen und neu starten, weil Offline-Cache aktualisiert wird. **Nicht die App vor der Sicherung löschen.**
+5. In **Daten** die Anzahl der Bewertungstage und vorhandene Tageseinträge kontrollieren. Die bisherige lokale Speicherkennung `gesundheits_tracker_v1` sowie `gesundheits_tracker_v2_extra` und `gesundheits_tracker_v2_goals` bleibt identisch – bei unveränderter URL und Browserumgebung bleiben die Daten normalerweise erhalten.
+6. **Nur wenn wirklich erforderlich**, gesichertes JSON unter **Daten → JSON importieren** auswählen. Achtung: Import ersetzt ALLE aktuell lokal gespeicherten Daten, auch Maßnahmen und Zielwerte. Vor einem Import immer den aktuellen Stand separat sichern.
+7. Nun unter **Daten → Vollständiges JSON-Backup** eine aktuelle V3-Sicherung erstellen.
 
-## Was ist neu?
+## Daten und Auswertung
+- Die 14 bekannten Kriterien und ihre bisherigen täglichen Werte (0–5) werden nicht geändert oder rückwirkend neu berechnet. Die bestehenden Regeln für automatische Punkte in V2 bleiben unverändert.
+- Tage mit fehlenden Einträgen werden nicht als 0 gewertet. Wochen beginnen am **Montag**. Zeiträume können aktuell auch Teilzeiträume enthalten; ihre Eintragsanzahl wird angezeigt.
+- Ein Gesamt-/Gruppentageswert ist das Mittel der **an diesem Tag erfassten** Kriterien; die individuelle Trendansicht berechnet anschließend den Durchschnitt der vorhandenen Tageswerte je Woche/Monat. Daher können Tage mit unvollständigen Bewertungen den Durchschnitt beeinflussen.
+- Tage mit null Einträgen erscheinen in der Analyse als Lücke. Wochen-/Monatswerte zeigen nur vorhandene Bewertungen. Für historische Daten sind keine Rückschlüsse auf nicht separat erfasste Aktivitäten möglich.
+- 28-Tage-Vergleich und Monatsreview sind **deskriptiv**, keine medizinischen Empfehlungen oder Kausalnachweise. Insbesondere ist „Stress“ die subjektive 0–5-Schlafbewertung, kein medizinischer Stresswert.
 
-- Start-Dashboard mit Tageswerten je Bereich, Wochenschnitt, acht Wochen Verlauf, Fortschritt der Wochenziele und regelbasierten Tipps.
-- Automatische 0–5-Punkte-Berechnung aus **Schritten, Stiegenrunden, Schlafdauer, Alkoholportionen und Süßigkeitenportionen**. Die restlichen Kriterien bleiben bewusst manuell. Jeder automatisch gesetzte Punktewert kann überschrieben werden.
-- Editierbare Wochenziele und Tageshäkchen für Krafttraining, Hometrainer, Qi Gong, Alkohol, Süßigkeiten sowie Liegestütze.
-- V2-JSON-Backup und CSV-Export; alte v1-Backups sind importierbar.
-
-## Bewertungsregeln
-
-| Eingabewert | Punkte |
-|---|---|
-| Schritte | >8000: 5; >7000: 4; >6000: 3; >5000: 2; >4000: 1; sonst: 0 |
-| Stiegenrunden | ≥10: 5; 9: 4; 8: 3; 7: 2; 6: 1; darunter: 0 |
-| Schlafstunden | ≥8: 5; ≥7,5: 4; ≥7: 3; ≥6: 2; ≥5: 1; darunter: 0 |
-| Alkoholportionen | 0: 5; 1: 4; 2: 3; 3: 2; 4: 1; ≥5: 0 |
-| Süßigkeitenportionen | 0: 5; 1: 3; 2: 1; ≥3: 0 |
-
-Die Schritte- und Stiegenskala orientiert sich an der alten Excel-App. Die übrigen automatischen Skalen sind **editierbare Vorschläge im Quellcode**, keine medizinisch validierten Grenzwerte. „Portion“ ist eine vereinfachte persönliche Zähleinheit, keine Gramm- oder Standarddrink-Berechnung.
-
-## Historische Daten und Grenzen
-
-- Bei einem normalen Update auf **demselben iPhone**, derselben installierten Home-Bildschirm-App/Website und unveränderter Pages-Adresse werden vorhandene Bewertungen über den bestehenden lokalen Schlüssel geladen. **Vorher trotzdem sichern!**
-- Diese öffentliche GitHub-Version enthält **keine** privaten alten Excel-Einträge (`data.js` enthält `{}`). Bestehende lokale Daten werden nicht auf GitHub hochgeladen.
-- Alte Bewertungen werden nicht rückwirkend in gemessene Schritte, Alkoholportionen oder Trainingseinheiten umgerechnet. Dafür sind zusätzlich Messwerte oder Tageshäkchen notwendig.
-- Die Wochenziele zeigen jeweils die Zahl der Tage mit auswertbaren Angaben an; fehlende Tage werden nicht als nachgewiesene Nichterfüllung ausgegeben. Ein nicht gesetztes Häkchen ist keine eindeutige Aussage, ob etwas stattgefunden hat.
-- Keine direkte Garmin-/Apple-Health-Anbindung, keine Push-Erinnerungen und keine iCloud-Synchronisierung.
-
-## Betrieb und Datenschutz
-
-GitHub Pages veröffentlicht **nur** HTML, CSS, JavaScript und Icon. Die App nutzt `localStorage` auf dem iPhone. Wer Website-Daten löscht, ein Gerät wechselt oder den Domainnamen ändert, muss das JSON-Backup wieder importieren. Das GitHub-Repository darf öffentlich sein, **aber private Backup-Dateien dürfen dort nicht abgelegt werden**.
+## Sicherheit & Betrieb
+- **Kein Konto, keine Cloud-Datenbank, keine automatische Synchronisierung.** Gesundheitsdaten liegen im lokalen `localStorage` der Web-App auf dem jeweiligen Gerät.
+- GitHub speichert nur die veröffentlichten App-Dateien. Private JSON-Backups gehören ausschließlich in private Ablagen, niemals ins öffentliche GitHub-Repository.
+- Regelmäßige JSON-Backups machen; Websitedaten löschen, Domainwechsel oder iPhone-Wechsel können die lokalen Daten sonst beseitigen.
+- App-Dateien sind bewusst ohne externe JavaScript-Bibliotheken gehalten und nach dem ersten Laden grundsätzlich offline nutzbar; GitHub Pages benötigt für Updates eine Internetverbindung.
